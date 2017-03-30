@@ -63,6 +63,7 @@ window.onload = function(){
 		for (var i = 0; i < 4; i++){
 			books[j*4+i] = new THREE.Mesh();
 			initBookObj('models/textures/book'+ (j*4+i+1) + '.jpg', books[j*4+i]);
+			books[j*4+i].rotation.set(0,PI/6,0);
 			books[j*4+i].position.set(-15+(i*10), 17.8-(12.25*j), 0);
 			books[j*4+i].castShadow = true;
 			books[j*4+i].resiveShudow = true;
@@ -177,6 +178,10 @@ window.onload = function(){
 			document.body.style.cursor = "pointer";
 		}
 	}
+
+	setTimeout(function (){
+		document.getElementById('loading').style.display = "none";
+	},2000)
 
 	//click on the books
 	window.addEventListener('click', onMouseDown, false);
