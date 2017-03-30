@@ -21,6 +21,16 @@ window.onload = function(){
 		'pdf/Джон Дакетт - HTML и CSS. Разработка и дизайн веб-сайтов (2013).pdf',
 		'pdf/professional+webgl+programming.pdf',
 		'pdf/WebGL Programming Guide.pdf',
+		'pdf/English for Information Technology 1.pdf',
+		'pdf/English for Information Technology 2.pdf',
+		'pdf/eloquentjavascript_ru.pdf',
+		'pdf/javascript-dlya-professionalnyih-veb-razrabotchikov.pdf',
+		'pdf/Learning_JavaScript.pdf',
+		'pdf/Veb-prilozhenia_na_JavaScript_2012_Makkou_A.pdf',
+		'pdf/meteor.pdf',
+		'pdf/sassdocs-fe-edition.pdf',
+		'pdf/Стоян Стефанов - JavaScript. Шаблоны - 2011.pdf',
+		'pdf/vvedenie-v-ecmascript-6.pdf'
 	]
 
 	var cubeMap = new THREE.CubeTextureLoader().load(urls);
