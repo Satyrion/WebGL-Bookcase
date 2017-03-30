@@ -35,3 +35,10 @@ canvas {
   #pdf-window #pdf-view {
     width: 100%;
     height: 100%; }
+
+#autor {
+  position: fixed;
+  color: #AAAAAA;
+  z-index: 90;
+  right: 10px;
+  bottom: 10px; }
