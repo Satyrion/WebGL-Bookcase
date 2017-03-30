@@ -14,6 +14,15 @@ window.onload = function(){
 		'img/cubemap/pz.jpg', 'img/cubemap/nz.jpg'
 	];
 
+	var booksPdf = [
+		'pdf/webgl-programmirovanie-trehmernoy-grafiki.pdf',
+		'pdf/Packt.Lear.2nd.Edition.Mar.2015.ISBN.1784392219.pdf',
+		'pdf/grafika-na-javascript.pdf',
+		'pdf/Джон Дакетт - HTML и CSS. Разработка и дизайн веб-сайтов (2013).pdf',
+		'pdf/professional+webgl+programming.pdf',
+		'pdf/WebGL Programming Guide.pdf'
+	]
+
 	var cubeMap = new THREE.CubeTextureLoader().load(urls);
 	cubeMap.format = THREE.RGBFormat;
 
@@ -174,6 +183,7 @@ window.onload = function(){
 		document.getElementById("pdf-window").style.display = "none";
 		for ( var i = 0; i < intersects.length; i++ ) {
 			if(intersects[i].object.position.z != 0){
+				document.getElementById("pdf-view").src = booksPdf[intersects[i].object.id - 10];
 				document.getElementById("pdf-window").style.display = "block";
 			}
 		}
@@ -184,7 +194,6 @@ window.onload = function(){
 
 		for ( var i = 0; i < intersects.length; i++ ) {
 			intersects[i].object.position.z +=5;
-			console.log(intersects[i].object);
 		}
 	}
 
