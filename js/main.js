@@ -176,6 +176,7 @@ window.onload = function(){
 		raycaster.setFromCamera( mouse, camera );
 		var intersects = raycaster.intersectObjects( shelf.children );
 		document.getElementById("pdf-window").style.display = "none";
+
 		for ( var i = 0; i < intersects.length; i++ ) {
 			if(intersects[i].object.position.z != 0){
 				document.getElementById("pdf-view").src = booksPdf[intersects[i].object.number];
@@ -185,17 +186,18 @@ window.onload = function(){
 
 		for(var i=0; i < shelf.children.length; i++){
 			shelf.children[i].position.z =0;
+			document.getElementById('text-help').innerHTML = "Выбирите книгу для просмотра!";
 		}
 
 		for ( var i = 0; i < intersects.length; i++ ) {
 			intersects[i].object.position.z +=5;
+			document.getElementById('text-help').innerHTML = "Нажмите на книгу еще раз для чтения!";
 		}
 	}
 
 	//var controls = new THREE.TrackballControls( camera );
 	//controls.rotateSpeed *=5;
 	//controls.noPan = true;
-
 
 	function render(){
 		requestAnimationFrame(render);
