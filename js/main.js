@@ -176,6 +176,7 @@ window.onload = function(){
 		raycaster.setFromCamera( mouse, camera );
 		var intersects = raycaster.intersectObjects( shelf.children );
 		document.getElementById("pdf-window").style.display = "none";
+		document.getElementById("pdf-window").src = null;
 
 		for ( var i = 0; i < intersects.length; i++ ) {
 			if(intersects[i].object.position.z != 0){
@@ -183,10 +184,10 @@ window.onload = function(){
 				document.getElementById("pdf-window").style.display = "block";
 			}
 		}
-
+		document.getElementById('text-help').innerHTML = "Выбирите книгу для просмотра!";
 		for(var i=0; i < shelf.children.length; i++){
-			shelf.children[i].position.z =0;
-			document.getElementById('text-help').innerHTML = "Выбирите книгу для просмотра!";
+			shelf.children[i].position.z = 0;
+			
 		}
 
 		for ( var i = 0; i < intersects.length; i++ ) {
