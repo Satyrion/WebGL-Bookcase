@@ -19,8 +19,8 @@ window.onload = function(){
 
 	scene.background = cubeMap;
 	var camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 0.1, 2000 );
-	camera.position.z = 100;
-	camera.position.y = 80;
+	camera.position.z = 70;
+	camera.position.y = 50;
 	camera.lookAt(new THREE.Vector3( 0, 30, 0 ));
 
 	var renderer = new THREE.WebGLRenderer({antialias: true});
@@ -191,13 +191,14 @@ window.onload = function(){
 		}
 	}
 
-	var controls = new THREE.TrackballControls( camera );
-	controls.rotateSpeed *=5;
+	//var controls = new THREE.TrackballControls( camera );
+	//controls.rotateSpeed *=5;
+	//controls.noPan = true;
 
 
 	function render(){
 		requestAnimationFrame(render);
-		controls.update();
+		//controls.update();
 		//keyControl();
 
 		renderer.render(scene,camera);
