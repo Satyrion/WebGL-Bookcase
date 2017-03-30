@@ -62,7 +62,7 @@ window.onload = function(){
 		}
 	}
 
-	//console.log(shelf.children);
+	console.log(shelf.children);
 
 	//books loader
 	function initBookObj(pathToImg,obj){
@@ -171,11 +171,10 @@ window.onload = function(){
 		mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
 		raycaster.setFromCamera( mouse, camera );
 		var intersects = raycaster.intersectObjects( shelf.children );
-
+		document.getElementById("pdf-window").style.display = "none";
 		for ( var i = 0; i < intersects.length; i++ ) {
 			if(intersects[i].object.position.z != 0){
-				//alert('this');
-				console.log('next');
+				document.getElementById("pdf-window").style.display = "block";
 			}
 		}
 
@@ -184,10 +183,8 @@ window.onload = function(){
 		}
 
 		for ( var i = 0; i < intersects.length; i++ ) {
-			if(intersects[i].object.position.z != 0){
-				alert('this');
-			}
 			intersects[i].object.position.z +=5;
+			console.log(intersects[i].object);
 		}
 	}
 
