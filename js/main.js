@@ -20,7 +20,7 @@ window.onload = function(){
 		'pdf/grafika-na-javascript.pdf',
 		'pdf/Джон Дакетт - HTML и CSS. Разработка и дизайн веб-сайтов (2013).pdf',
 		'pdf/professional+webgl+programming.pdf',
-		'pdf/WebGL Programming Guide.pdf'
+		'pdf/WebGL Programming Guide.pdf',
 	]
 
 	var cubeMap = new THREE.CubeTextureLoader().load(urls);
@@ -49,18 +49,6 @@ window.onload = function(){
 	ambientLight.position.set(0,10,0);
 	scene.add(ambientLight);
 
-	var planeTexture = new THREE.TextureLoader().load("img/table2.jpg");
-
-	var planeGeometry = new THREE.PlaneGeometry( 200, 200);
-	var planeMaterial = new THREE.MeshLambertMaterial({color: 0x696256, map: planeTexture});
-	var plane = new THREE.Mesh( planeGeometry,planeMaterial);
-	plane.position.y = 0;
-	plane.rotation.x -=Math.PI/2;
-	plane.receiveShadow = true;
-	//scene.add(plane);
-
-	
-
 	for (var j = 0; j < 4; j++){
 		for (var i = 0; i < 4; i++){
 			books[j*4+i] = new THREE.Mesh();
@@ -68,6 +56,7 @@ window.onload = function(){
 			books[j*4+i].position.set(-15+(i*10), 17.8-(12.25*j), 0);
 			books[j*4+i].castShadow = true;
 			books[j*4+i].resiveShudow = true;
+			books[j*4+i].number = j*4+i;
 		}
 	}
 
@@ -158,6 +147,12 @@ window.onload = function(){
 		mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
 		mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
 
+		//rotation camera
+			camera.position.x = (event.clientX - window.innerWidth / 2 ) * 0.01;
+			camera.position.y = 40+ (event.clientY - window.innerHeight / 2 ) * -0.01;
+			camera.lookAt(new THREE.Vector3( 0, 30, 0 ));
+
+		//rotattion books
 		raycaster.setFromCamera( mouse, camera );
 		var intersects = raycaster.intersectObjects( shelf.children );
 		for (var i = 0; i < shelf.children.length; i++){
@@ -183,7 +178,7 @@ window.onload = function(){
 		document.getElementById("pdf-window").style.display = "none";
 		for ( var i = 0; i < intersects.length; i++ ) {
 			if(intersects[i].object.position.z != 0){
-				document.getElementById("pdf-view").src = booksPdf[intersects[i].object.id - 10];
+				document.getElementById("pdf-view").src = booksPdf[intersects[i].object.number];
 				document.getElementById("pdf-window").style.display = "block";
 			}
 		}
