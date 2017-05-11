@@ -163,7 +163,7 @@ window.onload = function(){
 			camera.position.y = 40+ (event.clientY - window.innerHeight / 2 ) * -0.01;
 			camera.lookAt(new THREE.Vector3( 0, 30, 0 ));
 
-		//rotattion books
+		//rotating books
 		raycaster.setFromCamera( mouse, camera );
 		var intersects = raycaster.intersectObjects( shelf.children );
 		for (var i = 0; i < shelf.children.length; i++){
