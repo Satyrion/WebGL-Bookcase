@@ -59,6 +59,27 @@ window.onload = function(){
 	ambientLight.position.set(0,10,0);
 	scene.add(ambientLight);
 
+	//text
+	var textFont;
+	var loader = new THREE.FontLoader().load("fonts/droid_sans_mono_regular.typeface.json",function(font){
+		createText(font);
+	});
+	
+	function createText(font){
+		var TopText = new THREE.Mesh(new THREE.TextGeometry("Hello",{
+			font: font,
+			size: 2,
+			height: 3,
+			curveSegments: 10,
+			bevelEnabled: false
+		}), new THREE.MeshNormalMaterial());
+
+		TopText.position.set(-5,53,0);
+		scene.add(TopText);
+
+	}
+
+
 	for (var j = 0; j < 4; j++){
 		for (var i = 0; i < 4; i++){
 			books[j*4+i] = new THREE.Mesh();
@@ -202,6 +223,7 @@ window.onload = function(){
 		document.getElementById('text-help').innerHTML = "Выбирите книгу для просмотра!";
 		for(var i=0; i < shelf.children.length; i++){
 			shelf.children[i].position.z = 0;
+
 			
 		}
 
