@@ -38,8 +38,8 @@ window.onload = function(){
 
 	scene.background = cubeMap;
 	var camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 0.1, 2000 );
-	camera.position.z = 70;
-	camera.position.y = 50;
+	camera.position.z = 80;
+	camera.position.y = 60;
 	camera.lookAt(new THREE.Vector3( 0, 30, 0 ));
 
 	var renderer = new THREE.WebGLRenderer({antialias: true});
@@ -60,21 +60,37 @@ window.onload = function(){
 	scene.add(ambientLight);
 
 	//text
-	var textFont;
-	var loader = new THREE.FontLoader().load("fonts/droid_sans_mono_regular.typeface.json",function(font){
-		createText(font);
-	});
+	var font;
+	function loadFont(){
+		var loader = new THREE.FontLoader().load("fonts/droid_sans_mono_regular.typeface.json",function(response){
+			font = response;
+			createText("Learning JavaScript", response);
+		});
+
+	}
+	loadFont();
 	
-	function createText(font){
-		var TopText = new THREE.Mesh(new THREE.TextGeometry("Hello",{
+	console.log(font);
+
+	function createText(text,font){
+
+		if(scene.getObjectByName("text")){
+			scene.remove(getObjectByName("text"));
+		}
+
+		var TopText = new THREE.Mesh(new THREE.TextGeometry(text,{
 			font: font,
 			size: 2,
-			height: 3,
+			height: 1,
 			curveSegments: 10,
 			bevelEnabled: false
 		}), new THREE.MeshNormalMaterial());
 
-		TopText.position.set(-5,53,0);
+		TopText.geometry.computeBoundingBox();
+		var centerOffset = -0.5 * ( TopText.geometry.boundingBox.max.x - TopText.geometry.boundingBox.min.x );
+
+		TopText.position.set(centerOffset,53,0);
+		TopText.name = "text";
 		scene.add(TopText);
 
 	}
