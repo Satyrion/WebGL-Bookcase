@@ -59,41 +59,42 @@ window.onload = function(){
 	ambientLight.position.set(0,10,0);
 	scene.add(ambientLight);
 
-	//text
-	var font;
-	function loadFont(){
-		var loader = new THREE.FontLoader().load("fonts/droid_sans_mono_regular.typeface.json",function(response){
-			font = response;
-			createText("Learning JavaScript", response);
-		});
 
-	}
-	loadFont();
-	
-	console.log(font);
+	/*		TEXT 		*/
 
-	function createText(text,font){
+	function createText(text){
 
 		if(scene.getObjectByName("text")){
-			scene.remove(getObjectByName("text"));
+			scene.remove(scene.getObjectByName("text"));
 		}
+
+
+		var loader = new THREE.FontLoader().load("fonts/droid_sans_mono_regular.typeface.json",function(font){
+
+		
 
 		var TopText = new THREE.Mesh(new THREE.TextGeometry(text,{
 			font: font,
-			size: 2,
-			height: 1,
+			size: 0.9,
+			height: 0.5,
 			curveSegments: 10,
-			bevelEnabled: false
-		}), new THREE.MeshNormalMaterial());
+			//bevelEnabled: false
+		}), new THREE.MeshBasicMaterial({color: 0xBABABA}));
 
 		TopText.geometry.computeBoundingBox();
 		var centerOffset = -0.5 * ( TopText.geometry.boundingBox.max.x - TopText.geometry.boundingBox.min.x );
 
-		TopText.position.set(centerOffset,53,0);
+		TopText.position.set(centerOffset,51,5);
 		TopText.name = "text";
+		TopText.castShadow = true;
 		scene.add(TopText);
+		console.log(TopText);
+	});
+	};
 
-	}
+	//createText("Select a book");
+
+
 
 
 	for (var j = 0; j < 4; j++){
@@ -229,23 +230,34 @@ window.onload = function(){
 		var intersects = raycaster.intersectObjects( shelf.children );
 		document.getElementById("pdf-window").style.display = "none";
 		document.getElementById("pdf-window").src = null;
+		if(scene.getObjectByName("text")){
+			scene.remove(scene.getObjectByName("text"));
+		}
+
 
 		for ( var i = 0; i < intersects.length; i++ ) {
 			if(intersects[i].object.position.z != 0){
 				document.getElementById("pdf-view").src = booksPdf[intersects[i].object.number];
 				document.getElementById("pdf-window").style.display = "block";
 			}
+			//createText("");
 		}
+
 		document.getElementById('text-help').innerHTML = "Выбирите книгу для просмотра!";
 		for(var i=0; i < shelf.children.length; i++){
 			shelf.children[i].position.z = 0;
-
+			//createText("");
 			
 		}
+
+		//createText("");
 
 		for ( var i = 0; i < intersects.length; i++ ) {
 			intersects[i].object.position.z +=5;
 			document.getElementById('text-help').innerHTML = "Нажмите на книгу еще раз для чтения!";
+			
+			//file name to text
+			createText((booksPdf[intersects[i].object.number]).substring(4,(booksPdf[intersects[i].object.number]).length - 4));
 		}
 	}
 
