@@ -59,27 +59,22 @@ window.onload = function(){
 	ambientLight.position.set(0,10,0);
 	scene.add(ambientLight);
 
-
 	/*		TEXT 		*/
-
 	function createText(text){
 
 		if(scene.getObjectByName("text")){
 			scene.remove(scene.getObjectByName("text"));
 		}
 
-
 		var loader = new THREE.FontLoader().load("fonts/droid_sans_mono_regular.typeface.json",function(font){
-
-		
 
 		var TopText = new THREE.Mesh(new THREE.TextGeometry(text,{
 			font: font,
 			size: 0.9,
-			height: 0.5,
+			height: 1,
 			curveSegments: 10,
 			//bevelEnabled: false
-		}), new THREE.MeshBasicMaterial({color: 0xBABABA}));
+		}), new THREE.MeshNormalMaterial({color: 0xBABABA}));
 
 		TopText.geometry.computeBoundingBox();
 		var centerOffset = -0.5 * ( TopText.geometry.boundingBox.max.x - TopText.geometry.boundingBox.min.x );
@@ -87,15 +82,10 @@ window.onload = function(){
 		TopText.position.set(centerOffset,51,5);
 		TopText.name = "text";
 		TopText.castShadow = true;
+		TopText.resiveShudow = true;
 		scene.add(TopText);
-		console.log(TopText);
 	});
 	};
-
-	//createText("Select a book");
-
-
-
 
 	for (var j = 0; j < 4; j++){
 		for (var i = 0; i < 4; i++){
@@ -132,9 +122,6 @@ window.onload = function(){
 	 		});
 		});
 	}
-
-	shelf.castShadow = true;
-	shelf.receiveShadow = true;
 	
 	//loaded shelf for books
 	var mtlLoader = new THREE.MTLLoader();
@@ -156,9 +143,9 @@ window.onload = function(){
 		 		});
 			});
 
-
+	shelf.castShadow = true;
+	shelf.receiveShadow = true;
 	shelf.position.y +=27;
-	//console.log(shelf);
 	scene.add(shelf);
 
 	var posY = 0, posX = 0;
@@ -171,8 +158,6 @@ window.onload = function(){
 				case 39: posX +=step; break;
 				//case 40: posY -=step; break;
 			}
-			//book.rotation.y += posX;
-			//book2.rotation.y += posX;
 			shelf.rotation.y += posX;
 			posY = posX = 0;
 		}
@@ -182,7 +167,7 @@ window.onload = function(){
 	var raycaster = new THREE.Raycaster();
 	var mouse = new THREE.Vector2();
 
-	//select books
+	//select the books
 	window.addEventListener( 'mousemove', onMouseMove, false );
 
 	window.addEventListener( 'resize', onWindowResize, false );
@@ -201,7 +186,7 @@ window.onload = function(){
 			camera.position.y = 40+ (event.clientY - window.innerHeight / 2 ) * -0.01;
 			camera.lookAt(new THREE.Vector3( 0, 30, 0 ));
 
-		//rotating books
+		//rotating the books
 		raycaster.setFromCamera( mouse, camera );
 		var intersects = raycaster.intersectObjects( shelf.children );
 		for (var i = 0; i < shelf.children.length; i++){
@@ -221,7 +206,7 @@ window.onload = function(){
 		document.getElementById('loading').style.display = "none";
 	},2000)
 
-	//click on the books
+	//clicks on the books
 	window.addEventListener('click', onMouseDown, false);
 	function onMouseDown ( event ) {
 		mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
@@ -234,23 +219,18 @@ window.onload = function(){
 			scene.remove(scene.getObjectByName("text"));
 		}
 
-
 		for ( var i = 0; i < intersects.length; i++ ) {
 			if(intersects[i].object.position.z != 0){
 				document.getElementById("pdf-view").src = booksPdf[intersects[i].object.number];
 				document.getElementById("pdf-window").style.display = "block";
 			}
-			//createText("");
 		}
 
 		document.getElementById('text-help').innerHTML = "Выбирите книгу для просмотра!";
 		for(var i=0; i < shelf.children.length; i++){
 			shelf.children[i].position.z = 0;
-			//createText("");
 			
 		}
-
-		//createText("");
 
 		for ( var i = 0; i < intersects.length; i++ ) {
 			intersects[i].object.position.z +=5;
@@ -269,7 +249,6 @@ window.onload = function(){
 		requestAnimationFrame(render);
 		//controls.update();
 		//keyControl();
-
 		renderer.render(scene,camera);
 	}
 	render();
