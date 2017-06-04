@@ -76,3 +76,10 @@ canvas {
   z-index: 90;
   right: 10px;
   bottom: 10px; }
+
+#copyrights {
+  position: fixed;
+  color: #AAAAAA;
+  z-index: 90;
+  left: 1px;
+  bottom: 1px; }
