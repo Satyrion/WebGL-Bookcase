@@ -74,7 +74,7 @@ window.onload = function(){
 			height: 1,
 			curveSegments: 10,
 			//bevelEnabled: false
-		}), new THREE.MeshNormalMaterial({color: 0xBABABA}));
+		}), new THREE.MeshBasicMaterial({color: 0xBABABA}));
 
 		TopText.geometry.computeBoundingBox();
 		var centerOffset = -0.5 * ( TopText.geometry.boundingBox.max.x - TopText.geometry.boundingBox.min.x );
