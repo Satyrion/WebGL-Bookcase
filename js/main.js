@@ -47,16 +47,16 @@ window.onload = function(){
 	renderer.shadowMap.enabled = true;
 	document.body.appendChild( renderer.domElement );
 
-	var pointLight = new THREE.PointLight( 0xC1C1C1 );
-	pointLight.position.set(30,25,100);
+	var pointLight = new THREE.PointLight( 0x6D6D6D );
+	pointLight.position.set(10,50,80);
 	pointLight.castShadow = true;
 	var pointLight2 = new THREE.PointLight( 0xC1C1C1 );
 	pointLight2.position.set(-50,50,100);
 	pointLight2.castShadow = true;
 	//scene.add(pointLight2);
 	scene.add(pointLight);
-	var ambientLight = new THREE.AmbientLight( 0xffffff);
-	ambientLight.position.set(0,10,0);
+	var ambientLight = new THREE.AmbientLight( 0xF2F2F2);
+	ambientLight.position.set(0,100,20);
 	scene.add(ambientLight);
 
 	/*		TEXT 		*/
