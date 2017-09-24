@@ -1,1 +1,1 @@
-# https://satyrion.github.io/webgl/
+https://satyrion.github.io/WebGL-Bookcase/
